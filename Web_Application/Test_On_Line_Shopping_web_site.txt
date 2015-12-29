@@ -1,0 +1,34 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          Amazon_test.txt
+
+*** Variables ***
+
+*** Test Cases ***
+Browsing website for Todays deal and adding to cart
+    [Documentation]    Test Scenario 1:- \ User is not a member but he can browse the web page
+    ...
+    ...    The test case is to test if the user is not a member or login in the website but still he can search the items he is looking for it. If he like something he can also able to add to the cart. When he hit the Proceed to checkout button Login page is shown. (if user is existing user can add login details and continue to shopping or he can register to the service)
+    [Tags]    Smoke    Regression    Functional
+    [Setup]    Openning Amozon Home Page
+    Click on today's deal link
+    Click on Amazon Devices checkbox under Departments
+    Adding the Item to Cart
+    Open Shopping Cart
+    Proceed to Check out from the Shopping Cart
+    [Teardown]    Close all Open Browsers
+
+Searching and adding product to the cart with logged in user
+    [Documentation]    Test Scenario 2:- Searching and adding product to the cart with logged in user
+    ...
+    ...    The test case is to test if the user is existing member and login to the service. User is able to search for the product he is looking for. He/she is able to add the searched product to the cart \ and when user hit the \ Proceed to checkout(Button) the Shipping address page is shown.
+    [Setup]    Openning Amozon Home Page
+    Loggin in Amazon
+    Searching for product
+    Selecting the Product
+    Add to cart
+    #Proceed to check out
+    Logout
+    [Teardown]    Close all Open Browsers
+
+*** Keywords ***

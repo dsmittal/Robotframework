@@ -1,0 +1,58 @@
+*** Variables ***
+@{Email ID}       dmittal705@gmail.com
+@{Password}
+@{Open Amazon URL}    http://www.amazon.com
+@{Browser}        chrome
+
+*** Keywords ***
+Click on today's deal link
+    Click Element    Xpath=//*[@id="nav-xshop"]/a[2]
+
+Click on Amazon Devices check box under Departments
+    Click Element    Xpath=//*[@id="widgetFilters"]/div[1]/div/span[1]/div/label/span
+    Wait Until Page Contains    Deal of the Day
+    Checkbox Should Be Selected    Xpath=//*[@id="widgetFilters"]/div[1]/div/span[1]/div/label/input
+
+Openning Amozon Home Page
+    Open Browser    @{Open Amazon URL}    @{Browser}
+    Wait Until Page Contains    Shop by
+    Maximize Browser Window
+
+Adding the Item to Cart
+    Click Button    Xpath=//*[@id="100_dealView_0"]/div/div[2]/div/div[5]/div[2]/div/span/span/span/button
+
+Close all Open Browsers
+    Close All Browsers
+
+Open Shopping Cart
+    Click Element    Xpath=//*[@id="nav-cart"]
+
+Proceed to Check out from the Shopping Cart
+    Click Button    Xpath=//*[@id="sc-buy-box-ptc-button"]/span/input
+
+Loggin in Amazon
+    Click Link    id=nav-link-yourAccount
+    Input Text    id=ap_email    @{Email ID}
+    Input Password    id=ap_password    @{Password}
+    Click Button    id=signInSubmit
+    Wait Until Page Contains    Hello,
+
+Searching for product
+    Input Text    css=#twotabsearchtextbox    iphone 6 case
+    Click Button    css=#nav-search > form >div.nav-right > div > input
+    Wait Until Page Contains    Next Page
+
+Selecting the Product
+    Click Element    css=#result_0 > div > div:nth-child(4) > div.a-row.a-spacing-none > a > h2
+
+Add to cart
+    Click Button    css=#add-to-cart-button
+    wait until page contains    Added to Cart
+
+Proceed to check out
+    Click Element    css=#hlb-ptc-btn-native
+    Get Matching Xpath Count    //*[@id="hlb-subcart"]/div[1]/span/span[1]/b
+
+Logout
+    Mouse Over    Xpath=//*[@id="nav-link-yourAccount"]
+    Click Element    Xpath=//*[@id="nav-item-signout"]/span
